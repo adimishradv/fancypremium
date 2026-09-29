@@ -191,7 +191,7 @@ footer {
   <!-- ADMIN PANEL -->
   <div id="adminView" class="hidden">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
-      <p style="color:#94a3b8;font-size:14px;">👤 লগইন: <b style="color:#38bdf8;">kumar@5981</b></p>
+      <p style="color:#94a3b8;font-size:14px;">👤 লগইন: <b style="color:#38bdf8;"></b></p>
       <button class="btn btn-logout" onclick="doLogout()">🚪 লগআউট</button>
     </div>
 
@@ -249,8 +249,8 @@ footer {
 
 <script>
 // ===== ADMIN CREDENTIALS =====
-var ADMIN_USER = "kumar@5981";
-var ADMIN_PASS = "Songsar@2060";
+var ADMIN_USER = "";
+var ADMIN_PASS = "";
 var isLoggedIn = false;
 
 // ===== ডিফল্ট ডেটা (সম্পূর্ণ মার্কেট তালিকা) =====
