@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> Listing — Fancy & Premium</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Segoe UI', 'Noto Sans Bengali', Arial, sans-serif;
+  background:#0f172a; color:#e2e8f0; min-height:100vh;
+}
+header {
+  background:linear-gradient(135deg,#1e293b,#334155);
+  padding:24px 20px; text-align:center;
+  border-bottom:3px solid #38bdf8;
+}
+header h1 { color:#38bdf8; font-size:26px; margin-bottom:6px; }
+header p { color:#94a3b8; font-size:14px; margin-bottom:12px; }
+.tabs { display:flex; justify-content:center; gap:10px; margin-top:12px; flex-wrap:wrap; }
+.tab-btn {
+  padding:10px 24px; border:none; border-radius:6px;
+  background:#334155; color:#e2e8f0; cursor:pointer;
+  font-size:15px; font-weight:600; transition:all .2s;
+}
+.tab-btn.active { background:#38bdf8; color:#0f172a; }
+main { max-width:1100px; margin:0 auto; padding:24px 16px; }
+.search-box { margin-bottom:24px; text-align:center; }
+.search-box input {
+  width:100%; max-width:500px; padding:12px 18px;
+  border-radius:8px; border:1px solid #334155;
+  background:#1e293b; color:#e2e8f0; font-size:15px;
+}
+.search-box input:focus { outline:none; border-color:#38bdf8; }
+.listing-section { margin-bottom:40px; }
+.listing-section h2 {
+  color:#38bdf8; font-size:22px; margin-bottom:16px;
+  padding-bottom:8px; border-bottom:2px solid #1e293b;
+}
+.sport-title {
+  color:#f59e0b; font-size:18px; margin:24px 0 12px;
+  padding:8px 14px; background:#1e293b; border-radius:8px;
+  border-left:4px solid #f59e0b;
+}
+.cards {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:16px;
+}
+.card {
+  background:#1e293b; border:1px solid #334155;
+  border-radius:10px; padding:16px; transition:all .2s;
+}
+.card:hover { transform:translateY(-3px); border-color:#38bdf8; }
+.card .name { color:#f1f5f9; font-size:16px; font-weight:600; margin-bottom:8px; }
+.card .meaning { color:#94a3b8; font-size:14px; line-height:1.5; margin-bottom:10px; }
+.card .type {
+  display:inline-block; background:#0ea5e9; color:#0f172a;
+  font-size:12px; padding:3px 10px; border-radius:12px; font-weight:600;
+}
+.form-box {
+  background:#1e293b; border:1px solid #334155;
+  border-radius:10px; padding:20px; margin-bottom:24px;
+}
+.form-box h3 { color:#38bdf8; margin-bottom:14px; }
+.form-box label {
+  display:block; color:#94a3b8; font-size:13px;
+  margin-bottom:5px; margin-top:4px;
+}
+.form-box input, .form-box select {
+  width:100%; padding:10px 14px; margin-bottom:12px;
+  border-radius:6px; border:1px solid #334155;
+  background:#0f172a; color:#e2e8f0; font-size:14px; font-family:inherit;
+}
+.form-box input:focus, .form-box select:focus {
+  outline:none; border-color:#38bdf8;
+}
+.btn {
+  padding:10px 20px; border:none; border-radius:6px;
+  font-size:14px; font-weight:600; cursor:pointer; transition:all .2s;
+}
+.btn-primary { background:#38bdf8; color:#0f172a; }
+.btn-primary:hover { background:#0ea5e9; }
+.btn-reset { background:#475569; color:#fff; margin-left:8px; }
+.btn-edit { background:#f59e0b; color:#0f172a; margin-right:6px; padding:6px 12px; font-size:13px; }
+.btn-delete { background:#ef4444; color:white; padding:6px 12px; font-size:13px; }
+.btn-logout { background:#ef4444; color:white; margin-left:8px; }
+.admin-table {
+  width:100%; border-collapse:collapse; background:#1e293b;
+  border-radius:10px; overflow:hidden; margin-bottom:24px;
+}
+.admin-table th, .admin-table td {
+  padding:12px; text-align:left; border-bottom:1px solid #334155; font-size:14px;
+}
+.admin-table th { background:#0f172a; color:#38bdf8; }
+.admin-table tr:hover { background:#243347; }
+.sport-badge {
+  display:inline-block; background:#f59e0b; color:#0f172a;
+  font-size:11px; padding:2px 8px; border-radius:10px;
+  font-weight:600; text-transform:uppercase;
+}
+footer {
+  text-align:center; padding:20px; color:#64748b; font-size:13px;
+  border-top:1px solid #1e293b; margin-top:40px;
+}
+.hidden { display:none; }
+
+.login-wrap {
+  display:flex; justify-content:center; align-items:center;
+  min-height:60vh; padding:20px;
+}
+.login-box {
+  background:#1e293b; border:1px solid #334155;
+  border-radius:14px; padding:32px 28px;
+  width:100%; max-width:400px;
+  box-shadow:0 10px 40px rgba(0,0,0,.4);
+}
+.login-box h2 { color:#38bdf8; text-align:center; margin-bottom:8px; font-size:22px; }
+.login-box p.sub { color:#94a3b8; text-align:center; font-size:13px; margin-bottom:22px; }
+.login-box label { display:block; color:#94a3b8; font-size:13px; margin-bottom:6px; }
+.login-box input {
+  width:100%; padding:12px 14px; margin-bottom:16px;
+  border-radius:8px; border:1px solid #334155; background:#0f172a;
+  color:#e2e8f0; font-size:15px; font-family:inherit;
+}
+.login-box input:focus { outline:none; border-color:#38bdf8; }
+.login-box .btn-login {
+  width:100%; padding:12px; background:#38bdf8; color:#0f172a;
+  border:none; border-radius:8px; font-size:15px; font-weight:700;
+  cursor:pointer; transition:all .2s;
+}
+.login-box .btn-login:hover { background:#0ea5e9; }
+.login-error {
+  background:#7f1d1d; color:#fecaca;
+  padding:10px 14px; border-radius:8px;
+  font-size:13px; margin-bottom:14px; display:none;
+}
+.login-error.show { display:block; }
+
+@media (max-width:600px) {
+  header h1 { font-size:20px; }
+  .cards { grid-template-columns:1fr; }
+  .admin-table { font-size:12px; }
+  .admin-table th, .admin-table td { padding:8px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🏏Listing</h1>
+  <p>Fancy & Premium — বাংলা Meaning সহ</p>
+  <div class="tabs">
+    <button class="tab-btn active" id="tabFrontend" onclick="showTab('frontend')">📋 Frontend</button>
+    <button class="tab-btn" id="tabAdmin" onclick="showTab('admin')">⚙️ Admin Panel</button>
+  </div>
+</header>
+
+<main>
+  <!-- FRONTEND -->
+  <div id="frontendView">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="🔍 খুঁজুন...">
+    </div>
+    <section class="listing-section">
+      <h2>🎯 Fancy  (Cricket)</h2>
+      <div class="cards" id="fancyCards"></div>
+    </section>
+    <section class="listing-section">
+      <h2>⭐ Premium </h2>
+      <div id="premiumContainer"></div>
+    </section>
+  </div>
+
+  <!-- ADMIN LOGIN -->
+  <div id="adminLoginView" class="hidden">
+    <div class="login-wrap">
+      <div class="login-box">
+        <h2>🔐 Admin Login</h2>
+        <p class="sub">শুধুমাত্র অনুমোদিত ব্যক্তির জন্য</p>
+        <div class="login-error" id="loginError">❌ ভুল Username বা Password!</div>
+        <label>Username</label>
+        <input type="text" id="loginUser" placeholder="Username লিখুন" autocomplete="off">
+        <label>Password</label>
+        <input type="password" id="loginPass" placeholder="Password লিখুন" autocomplete="off">
+        <button class="btn-login" onclick="doLogin()">🔓 লগইন করুন</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMIN PANEL -->
+  <div id="adminView" class="hidden">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+      <p style="color:#94a3b8;font-size:14px;">👤 লগইন: <b style="color:#38bdf8;">kumar@5981</b></p>
+      <button class="btn btn-logout" onclick="doLogout()">🚪 লগআউট</button>
+    </div>
+
+    <div class="form-box">
+      <h3 id="formTitle">নতুন Market যোগ করুন</h3>
+      <input type="hidden" id="editId">
+
+      <label>Category</label>
+      <select id="category" onchange="toggleSportField()">
+        <option value="fancy">Fancy  (শুধু Cricket)</option>
+        <option value="premium">Premium </option>
+      </select>
+
+      <div id="sportField">
+        <label>Sport (খেলার ধরন)</label>
+        <select id="sport">
+          <option value="Cricket">🏏 Cricket</option>
+          <option value="Soccer">⚽ Soccer</option>
+          <option value="Tennis">🎾 Tennis</option>
+          <option value="Basketball">🏀 Basketball</option>
+          <option value="Other">🎮 Other</option>
+        </select>
+      </div>
+
+      <label>English Name</label>
+      <input type="text" id="nameInput" placeholder="যেমন: Match Winner - 2 Way">
+
+      <label>বাংলা Meaning</label>
+      <input type="text" id="meaningInput" placeholder="যেমন: ম্যাচের বিজয়ী দল">
+
+      <label>Type</label>
+      <input type="text" id="typeInput" placeholder="যেমন: 2 Way, Over/Under, Yes/No">
+
+      <button class="btn btn-primary" onclick="saveItem()">💾 সেভ করুন</button>
+      <button class="btn btn-reset" onclick="resetForm()">🔄 রিসেট</button>
+    </div>
+
+    <h3 style="color:#38bdf8;margin-bottom:12px;">🎯 Fancy </h3>
+    <table class="admin-table" id="fancyTable">
+      <thead><tr><th>Name</th><th>Meaning</th><th>Type</th><th>Action</th></tr></thead>
+      <tbody></tbody>
+    </table>
+
+    <h3 style="color:#38bdf8;margin-bottom:12px;">⭐ Premium </h3>
+    <table class="admin-table" id="premiumTable">
+      <thead><tr><th>Sport</th><th>Name</th><th>Meaning</th><th>Type</th><th>Action</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</main>
+
+<footer>
+  <p>⚠️ শুধুমাত্র তথ্য ও শিক্ষামূলক প্রদর্শন। কোনো লেনদেন নেই।</p>
+</footer>
+
+<script>
+// ===== ADMIN CREDENTIALS =====
+var ADMIN_USER = "kumar@5981";
+var ADMIN_PASS = "Songsar@2060";
+var isLoggedIn = false;
+
+// ===== ডিফল্ট ডেটা (সম্পূর্ণ মার্কেট তালিকা) =====
+var defaultData = {
+  fancy: [
+    { id: 1,  name: "6 Over Run",              meaning: "প্রথম ৬ ওভারে মোট রান",                      type: "Yes/No" },
+    { id: 2,  name: "10 Over Run",             meaning: "প্রথম ১০ ওভারে মোট রান",                     type: "Yes/No" },
+    { id: 3,  name: "15 Over Run",             meaning: "প্রথম ১৫ ওভারে মোট রান",                     type: "Yes/No" },
+    { id: 4,  name: "20 Over Run",             meaning: "প্রথম ২০ ওভারে মোট রান",                     type: "Yes/No" },
+    { id: 5,  name: "Session Runs",            meaning: "নির্দিষ্ট সেশনে মোট রান",                     type: "Yes/No" },
+    { id: 6,  name: "Fall of 1st WKT",         meaning: "প্রথম উইকেট কত রানে পড়বে",                  type: "Yes/No" },
+    { id: 7,  name: "Fall of Next Wicket",     meaning: "পরবর্তী উইকেট কত রানে পড়বে",                 type: "Yes/No" },
+    { id: 8,  name: "Batsman Runs",            meaning: "নির্দিষ্ট ব্যাটসম্যান কত রান করবে",           type: "Yes/No" },
+    { id: 9,  name: "Opening Partnership",     meaning: "ওপেনিং জুটির মোট রান",                       type: "Yes/No" },
+    { id: 10, name: "Next Over: Over/Under",   meaning: "পরবর্তী ওভারের রান লাইনের বেশি/কম",          type: "Yes/No" },
+    { id: 11, name: "Batsman Fours",           meaning: "নির্দিষ্ট ব্যাটসম্যান কতটি চার মারবে",         type: "Yes/No" },
+    { id: 12, name: "Batsman Sixes",           meaning: "নির্দিষ্ট ব্যাটসম্যান কতটি ছক্কা মারবে",       type: "Yes/No" },
+    { id: 13, name: "Bowler Wickets",          meaning: "নির্দিষ্ট বোলার কতটি উইকেট নেবে",            type: "Yes/No" },
+    { id: 14, name: "Total Fours in Match",    meaning: "ম্যাচে মোট চারের সংখ্যা",                     type: "Yes/No" },
+    { id: 15, name: "Total Sixes in Match",    meaning: "ম্যাচে মোট ছক্কার সংখ্যা",                   type: "Yes/No" }
+  ],
+  premium: [
+    // ===== Cricket =====
+    { id: 101, sport: "Cricket", name: "To Win the Match",                      meaning: "ম্যাচ জেতা",                                  type: "2 Way" },
+    { id: 102, sport: "Cricket", name: "To Win the Toss",                       meaning: "টস জেতা",                                    type: "2 Way" },
+    { id: 103, sport: "Cricket", name: "Total Runs in Match",                   meaning: "ম্যাচের মোট রান",                             type: "Over/Under" },
+    { id: 104, sport: "Cricket", name: "Most Match Sixes",                      meaning: "সর্বোচ্চ ম্যাচ ছক্কা",                        type: "Team" },
+    { id: 105, sport: "Cricket", name: "Most Run Outs (Fielding)",              meaning: "সর্বোচ্চ রান আউট (ফিল্ডিং)",                   type: "Team" },
+    { id: 106, sport: "Cricket", name: "Team to Make Highest 1st 6 Overs",      meaning: "প্রথম ৬ ওভারে সর্বোচ্চ স্কোর করে কোন দল",     type: "Team" },
+    { id: 107, sport: "Cricket", name: "Innings Runs",                          meaning: "এক ইনিংসে মোট রান",                          type: "Over/Under" },
+    { id: 108, sport: "Cricket", name: "Top Batsman in Innings",                meaning: "ইনিংসের সর্বোচ্চ রান সংগ্রাহক",               type: "Player" },
+    { id: 109, sport: "Cricket", name: "Top Bowler in Innings",                 meaning: "ইনিংসের সর্বোচ্চ উইকেট শিকারী",               type: "Player" },
+    { id: 110, sport: "Cricket", name: "Man of the Match",                      meaning: "ম্যান অফ দ্য ম্যাচ কে হবে",                    type: "Player" },
+    { id: 111, sport: "Cricket", name: "Highest Opening Partnership",           meaning: "সর্বোচ্চ ওপেনিং পার্টনারশিপ",                 type: "Team" },
+    { id: 112, sport: "Cricket", name: "Method of Next Wicket Dismissal",       meaning: "পরবর্তী উইকেট কীভাবে পড়বে",                  type: "Method" },
+    { id: 113, sport: "Cricket", name: "Total Run Outs",                        meaning: "ম্যাচে মোট রান আউটের সংখ্যা",                 type: "Over/Under" },
+    { id: 114, sport: "Cricket", name: "Total Extras",                          meaning: "ম্যাচে মোট অতিরিক্ত রান",                    type: "Over/Under" },
+    { id: 115, sport: "Cricket", name: "Match Fours",                           meaning: "ম্যাচে মোট চারের সংখ্যা",                     type: "Over/Under" },
+    { id: 116, sport: "Cricket", name: "Match Sixes",                           meaning: "ম্যাচে মোট ছক্কার সংখ্যা",                   type: "Over/Under" },
+
+    // ===== Soccer =====
+    { id: 201, sport: "Soccer",  name: "Match Result (1X2)",                    meaning: "ম্যাচের ফলাফল (হোম/ড্র/অ্যাওয়ে)",             type: "3 Way" },
+    { id: 202, sport: "Soccer",  name: "Double Chance",                         meaning: "ডাবল সুযোগ (দুই ফলাফলের যেকোনো একটি)",        type: "2 Way" },
+    { id: 203, sport: "Soccer",  name: "Winner",                                meaning: "বিজয়ী দল",                                  type: "2 Way" },
+    { id: 204, sport: "Soccer",  name: "Over/Under 1.5 Goals",                  meaning: "ওভার/আন্ডার ১.৫ গোল",                        type: "Over/Under" },
+    { id: 205, sport: "Soccer",  name: "Over/Under 2.5 Goals",                  meaning: "ওভার/আন্ডার ২.৫ গোল",                        type: "Over/Under" },
+    { id: 206, sport: "Soccer",  name: "Over/Under 3.5 Goals",                  meaning: "ওভার/আন্ডার ৩.৫ গোল",                        type: "Over/Under" },
+    { id: 207, sport: "Soccer",  name: "Half-Time",                             meaning: "হাফটাইম ফলাফল",                              type: "3 Way" },
+    { id: 208, sport: "Soccer",  name: "Half-Time / Full-Time",                 meaning: "হাফটাইম / ফুলটাইম ফলাফল",                    type: "3x3" },
+    { id: 209, sport: "Soccer",  name: "Both Teams to Score",                   meaning: "উভয় দল গোল করবে কি?",                        type: "Yes/No" },
+    { id: 210, sport: "Soccer",  name: "Both Teams to Score 1st Half",          meaning: "প্রথমার্ধে উভয় দল গোল করবে কি?",              type: "Yes/No" },
+    { id: 211, sport: "Soccer",  name: "Both Teams to Score 2nd Half",          meaning: "দ্বিতীয়ার্ধে উভয় দল গোল করবে কি?",            type: "Yes/No" },
+    { id: 212, sport: "Soccer",  name: "Home Team - Exact Goals",               meaning: "হোম টিম - সঠিক গোল সংখ্যা",                   type: "Score" },
+    { id: 213, sport: "Soccer",  name: "Away Team - Exact Goals",               meaning: "অ্যাওয়ে টিম - সঠিক গোল সংখ্যা",               type: "Score" },
+    { id: 214, sport: "Soccer",  name: "First Goal Scorer",                     meaning: "প্রথম গোল কে করবে",                          type: "Player" },
+    { id: 215, sport: "Soccer",  name: "Correct Score",                         meaning: "সঠিক স্কোর কত হবে",                          type: "Score" },
+    { id: 216, sport: "Soccer",  name: "Total Corners",                         meaning: "ম্যাচে মোট কর্নারের সংখ্যা",                  type: "Over/Under" },
+    { id: 217, sport: "Soccer",  name: "Total Cards",                           meaning: "ম্যাচে মোট কার্ডের সংখ্যা",                   type: "Over/Under" },
+
+    // ===== Tennis =====
+    { id: 301, sport: "Tennis",  name: "To Win Match",                          meaning: "ম্যাচ জেতা",                                  type: "2 Way" },
+    { id: 302, sport: "Tennis",  name: "Number of Sets - 2-Way",                meaning: "সেট সংখ্যা - ২-দিকের",                        type: "Over/Under" },
+    { id: 303, sport: "Tennis",  name: "Tie Break in Match",                    meaning: "ম্যাচে টাইব্রেক হবে কি?",                     type: "Yes/No" },
+    { id: 304, sport: "Tennis",  name: "1st Set Game Score",                    meaning: "প্রথম সেটের গেম স্কোর",                      type: "Score" },
+    { id: 305, sport: "Tennis",  name: "Set Winner",                            meaning: "নির্দিষ্ট সেট কে জিতবে",                      type: "2 Way" },
+    { id: 306, sport: "Tennis",  name: "Total Sets Over/Under",                 meaning: "ম্যাচে মোট সেটের সংখ্যা",                     type: "Over/Under" },
+    { id: 307, sport: "Tennis",  name: "Total Games Over/Under",                meaning: "ম্যাচে মোট গেমের সংখ্যা",                     type: "Over/Under" },
+    { id: 308, sport: "Tennis",  name: "Correct Set Score",                     meaning: "সঠিক সেট স্কোর (যেমন 2-0, 2-1)",              type: "Score" },
+    { id: 309, sport: "Tennis",  name: "First Set Winner",                      meaning: "প্রথম সেট কে জিতবে",                          type: "2 Way" }
+  ]
+};
+
+// ===== ডেটা লোড =====
+function loadData() {
+  try {
+    var stored = localStorage.getItem("betListingData_v3");
+    if (stored) return JSON.parse(stored);
+  } catch(e) {}
+  localStorage.setItem("betListingData_v3", JSON.stringify(defaultData));
+  return JSON.parse(JSON.stringify(defaultData));
+}
+
+var data = loadData();
+
+function saveData() {
+  localStorage.setItem("betListingData_v3", JSON.stringify(data));
+}
+
+// ===== ট্যাব সুইচ =====
+function showTab(tab) {
+  document.getElementById("tabFrontend").classList.remove("active");
+  document.getElementById("tabAdmin").classList.remove("active");
+
+  if (tab === "frontend") {
+    document.getElementById("tabFrontend").classList.add("active");
+    document.getElementById("frontendView").classList.remove("hidden");
+    document.getElementById("adminView").classList.add("hidden");
+    document.getElementById("adminLoginView").classList.add("hidden");
+    renderCards();
+  } else {
+    document.getElementById("tabAdmin").classList.add("active");
+    document.getElementById("frontendView").classList.add("hidden");
+
+    if (isLoggedIn) {
+      document.getElementById("adminView").classList.remove("hidden");
+      document.getElementById("adminLoginView").classList.add("hidden");
+      renderTables();
+    } else {
+      document.getElementById("adminView").classList.add("hidden");
+      document.getElementById("adminLoginView").classList.remove("hidden");
+      document.getElementById("loginUser").value = "";
+      document.getElementById("loginPass").value = "";
+      document.getElementById("loginError").classList.remove("show");
+    }
+  }
+}
+
+// ===== লগইন =====
+function doLogin() {
+  var u = document.getElementById("loginUser").value.trim();
+  var p = document.getElementById("loginPass").value;
+  var err = document.getElementById("loginError");
+
+  if (u === ADMIN_USER && p === ADMIN_PASS) {
+    isLoggedIn = true;
+    err.classList.remove("show");
+    document.getElementById("adminLoginView").classList.add("hidden");
+    document.getElementById("adminView").classList.remove("hidden");
+    renderTables();
+  } else {
+    err.classList.add("show");
+    document.getElementById("loginPass").value = "";
+  }
+}
+
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Enter") {
+    var loginView = document.getElementById("adminLoginView");
+    if (loginView && !loginView.classList.contains("hidden")) {
+      doLogin();
+    }
+  }
+});
+
+// ===== লগআউট =====
+function doLogout() {
+  if (!confirm("আপনি কি লগআউট করতে চান?")) return;
+  isLoggedIn = false;
+  document.getElementById("adminView").classList.add("hidden");
+  document.getElementById("adminLoginView").classList.remove("hidden");
+  document.getElementById("loginUser").value = "";
+  document.getElementById("loginPass").value = "";
+  document.getElementById("loginError").classList.remove("show");
+}
+
+// ===== Sport ফিল্ড দেখানো/লুকানো =====
+function toggleSportField() {
+  var cat = document.getElementById("category").value;
+  var sportField = document.getElementById("sportField");
+  if (cat === "fancy") {
+    sportField.classList.add("hidden");
+    document.getElementById("sport").value = "Cricket";
+  } else {
+    sportField.classList.remove("hidden");
+  }
+}
+
+// ===== ফ্রন্টএন্ড কার্ড রেন্ডার =====
+function renderCards() {
+  var searchEl = document.getElementById("searchInput");
+  var search = searchEl ? searchEl.value.toLowerCase() : "";
+
+  function match(i) {
+    return i.name.toLowerCase().indexOf(search) !== -1 ||
+           i.meaning.toLowerCase().indexOf(search) !== -1;
+  }
+
+  // Fancy
+  var fancyContainer = document.getElementById("fancyCards");
+  var fancyFiltered = data.fancy.filter(match);
+  if (fancyFiltered.length === 0) {
+    fancyContainer.innerHTML = '<p style="color:#64748b;">কিছু পাওয়া যায়নি।</p>';
+  } else {
+    fancyContainer.innerHTML = fancyFiltered.map(function(i) {
+      return '<div class="card">' +
+               '<div class="name">' + i.name + '</div>' +
+               '<div class="meaning">' + i.meaning + '</div>' +
+               '<span class="type">' + i.type + '</span>' +
+             '</div>';
+    }).join("");
+  }
+
+  // Premium
+  var premiumContainer = document.getElementById("premiumContainer");
+  var premiumFiltered = data.premium.filter(match);
+
+  if (premiumFiltered.length === 0) {
+    premiumContainer.innerHTML = '<p style="color:#64748b;">কিছু পাওয়া যায়নি।</p>';
+    return;
+  }
+
+  var groups = {};
+  var order = [];
+  premiumFiltered.forEach(function(i) {
+    var sp = i.sport || "Other";
+    if (!groups[sp]) { groups[sp] = []; order.push(sp); }
+    groups[sp].push(i);
+  });
+
+  var sportIcons = {
+    "Cricket": "🏏", "Soccer": "⚽", "Tennis": "🎾",
+    "Basketball": "🏀", "Other": "🎮"
+  };
+
+  var html = "";
+  order.forEach(function(sp) {
+    html += '<div class="sport-title">' + (sportIcons[sp] || "🎯") + ' ' + sp + '</div>';
+    html += '<div class="cards">';
+    groups[sp].forEach(function(i) {
+      html += '<div class="card">' +
+                '<div class="name">' + i.name + '</div>' +
+                '<div class="meaning">' + i.meaning + '</div>' +
+                '<span class="type">' + i.type + '</span>' +
+              '</div>';
+    });
+    html += '</div>';
+  });
+  premiumContainer.innerHTML = html;
+}
+
+// ===== অ্যাডমিন টেবিল রেন্ডার =====
+function renderTables() {
+  function buildFancyRows(items) {
+    if (items.length === 0) {
+      return '<tr><td colspan="4" style="text-align:center;color:#64748b;">কোনো ডেটা নেই</td></tr>';
+    }
+    return items.map(function(i) {
+      return '<tr>' +
+               '<td>' + i.name + '</td>' +
+               '<td>' + i.meaning + '</td>' +
+               '<td>' + i.type + '</td>' +
+               '<td>' +
+                 '<button class="btn btn-edit" onclick="editItem(\'fancy\', ' + i.id + ')">Edit</button>' +
+                 '<button class="btn btn-delete" onclick="deleteItem(\'fancy\', ' + i.id + ')">Delete</button>' +
+               '</td>' +
+             '</tr>';
+    }).join("");
+  }
+
+  function buildPremiumRows(items) {
+    if (items.length === 0) {
+      return '<tr><td colspan="5" style="text-align:center;color:#64748b;">কোনো ডেটা নেই</td></tr>';
+    }
+    return items.map(function(i) {
+      return '<tr>' +
+               '<td><span class="sport-badge">' + (i.sport || "Other") + '</span></td>' +
+               '<td>' + i.name + '</td>' +
+               '<td>' + i.meaning + '</td>' +
+               '<td>' + i.type + '</td>' +
+               '<td>' +
+                 '<button class="btn btn-edit" onclick="editItem(\'premium\', ' + i.id + ')">Edit</button>' +
+                 '<button class="btn btn-delete" onclick="deleteItem(\'premium\', ' + i.id + ')">Delete</button>' +
+               '</td>' +
+             '</tr>';
+    }).join("");
+  }
+
+  document.querySelector("#fancyTable tbody").innerHTML = buildFancyRows(data.fancy);
+  document.querySelector("#premiumTable tbody").innerHTML = buildPremiumRows(data.premium);
+}
+
+// ===== সেভ (Add / Edit) =====
+function saveItem() {
+  if (!isLoggedIn) { alert("আগে লগইন করুন!"); return; }
+
+  var editId = document.getElementById("editId").value;
+  var category = document.getElementById("category").value;
+  var sport = document.getElementById("sport").value;
+  var name = document.getElementById("nameInput").value.trim();
+  var meaning = document.getElementById("meaningInput").value.trim();
+  var type = document.getElementById("typeInput").value.trim();
+
+  if (!name || !meaning || !type) {
+    alert("সব ফিল্ড পূরণ করুন!");
+    return;
+  }
+
+  if (category === "fancy") {
+    if (editId) {
+      var item = data.fancy.find(function(i) { return i.id == editId; });
+      if (item) { item.name = name; item.meaning = meaning; item.type = type; }
+    } else {
+      data.fancy.push({ id: Date.now(), name: name, meaning: meaning, type: type });
+    }
+  } else {
+    if (editId) {
+      var item2 = data.premium.find(function(i) { return i.id == editId; });
+      if (item2) { item2.sport = sport; item2.name = name; item2.meaning = meaning; item2.type = type; }
+    } else {
+      data.premium.push({ id: Date.now(), sport: sport, name: name, meaning: meaning, type: type });
+    }
+  }
+
+  saveData();
+  renderTables();
+  resetForm();
+  alert("✅ সেভ হয়েছে!");
+}
+
+// ===== এডিট =====
+function editItem(category, id) {
+  var item;
+  if (category === "fancy") {
+    item = data.fancy.find(function(i) { return i.id === id; });
+  } else {
+    item = data.premium.find(function(i) { return i.id === id; });
+  }
+  if (!item) return;
+
+  document.getElementById("editId").value = id;
+  document.getElementById("category").value = category;
+  toggleSportField();
+  if (category === "premium" && item.sport) {
+    document.getElementById("sport").value = item.sport;
+  }
+  document.getElementById("nameInput").value = item.name;
+  document.getElementById("meaningInput").value = item.meaning;
+  document.getElementById("typeInput").value = item.type;
+  document.getElementById("formTitle").textContent = "✏️ Market এডিট করুন";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+// ===== ডিলিট =====
+function deleteItem(category, id) {
+  if (!isLoggedIn) { alert("আগে লগইন করুন!"); return; }
+  if (!confirm("আপনি কি নিশ্চিত এই আইটেম ডিলিট করতে চান?")) return;
+  if (category === "fancy") {
+    data.fancy = data.fancy.filter(function(i) { return i.id !== id; });
+  } else {
+    data.premium = data.premium.filter(function(i) { return i.id !== id; });
+  }
+  saveData();
+  renderTables();
+}
+
+// ===== রিসেট =====
+function resetForm() {
+  document.getElementById("editId").value = "";
+  document.getElementById("category").value = "fancy";
+  document.getElementById("sport").value = "Cricket";
+  document.getElementById("nameInput").value = "";
+  document.getElementById("meaningInput").value = "";
+  document.getElementById("typeInput").value = "";
+  document.getElementById("formTitle").textContent = "নতুন Market যোগ করুন";
+  toggleSportField();
+}
+
+// ===== শুরু =====
+document.getElementById("searchInput").addEventListener("input", renderCards);
+toggleSportField();
+renderCards();
+</script>
+
+</body>
+</html>
