@@ -1,10 +1,9 @@
-# fancypremium
 <!DOCTYPE html>
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> Listing — Fancy & Premium</title>
+<title>Bet Listing — Fancy & Premium</title>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
@@ -84,7 +83,6 @@ main { max-width:1100px; margin:0 auto; padding:24px 16px; }
 .btn-reset { background:#475569; color:#fff; margin-left:8px; }
 .btn-edit { background:#f59e0b; color:#0f172a; margin-right:6px; padding:6px 12px; font-size:13px; }
 .btn-delete { background:#ef4444; color:white; padding:6px 12px; font-size:13px; }
-.btn-logout { background:#ef4444; color:white; margin-left:8px; }
 .admin-table {
   width:100%; border-collapse:collapse; background:#1e293b;
   border-radius:10px; overflow:hidden; margin-bottom:24px;
@@ -104,39 +102,6 @@ footer {
   border-top:1px solid #1e293b; margin-top:40px;
 }
 .hidden { display:none; }
-
-.login-wrap {
-  display:flex; justify-content:center; align-items:center;
-  min-height:60vh; padding:20px;
-}
-.login-box {
-  background:#1e293b; border:1px solid #334155;
-  border-radius:14px; padding:32px 28px;
-  width:100%; max-width:400px;
-  box-shadow:0 10px 40px rgba(0,0,0,.4);
-}
-.login-box h2 { color:#38bdf8; text-align:center; margin-bottom:8px; font-size:22px; }
-.login-box p.sub { color:#94a3b8; text-align:center; font-size:13px; margin-bottom:22px; }
-.login-box label { display:block; color:#94a3b8; font-size:13px; margin-bottom:6px; }
-.login-box input {
-  width:100%; padding:12px 14px; margin-bottom:16px;
-  border-radius:8px; border:1px solid #334155; background:#0f172a;
-  color:#e2e8f0; font-size:15px; font-family:inherit;
-}
-.login-box input:focus { outline:none; border-color:#38bdf8; }
-.login-box .btn-login {
-  width:100%; padding:12px; background:#38bdf8; color:#0f172a;
-  border:none; border-radius:8px; font-size:15px; font-weight:700;
-  cursor:pointer; transition:all .2s;
-}
-.login-box .btn-login:hover { background:#0ea5e9; }
-.login-error {
-  background:#7f1d1d; color:#fecaca;
-  padding:10px 14px; border-radius:8px;
-  font-size:13px; margin-bottom:14px; display:none;
-}
-.login-error.show { display:block; }
-
 @media (max-width:600px) {
   header h1 { font-size:20px; }
   .cards { grid-template-columns:1fr; }
@@ -148,8 +113,8 @@ footer {
 <body>
 
 <header>
-  <h1>🏏Listing</h1>
-  <p>Fancy & Premium — বাংলা Meaning সহ</p>
+  <h1>🏏 Bet Listing</h1>
+  <p>Fancy Bet & Premium Bet — বাংলা Meaning সহ</p>
   <div class="tabs">
     <button class="tab-btn active" id="tabFrontend" onclick="showTab('frontend')">📋 Frontend</button>
     <button class="tab-btn" id="tabAdmin" onclick="showTab('admin')">⚙️ Admin Panel</button>
@@ -163,46 +128,25 @@ footer {
       <input type="text" id="searchInput" placeholder="🔍 খুঁজুন...">
     </div>
     <section class="listing-section">
-      <h2>🎯 Fancy  (Cricket)</h2>
+      <h2>🎯 Fancy Bet (Cricket)</h2>
       <div class="cards" id="fancyCards"></div>
     </section>
     <section class="listing-section">
-      <h2>⭐ Premium </h2>
+      <h2>⭐ Premium Bet</h2>
       <div id="premiumContainer"></div>
     </section>
   </div>
 
-  <!-- ADMIN LOGIN -->
-  <div id="adminLoginView" class="hidden">
-    <div class="login-wrap">
-      <div class="login-box">
-        <h2>🔐 Admin Login</h2>
-        <p class="sub">শুধুমাত্র অনুমোদিত ব্যক্তির জন্য</p>
-        <div class="login-error" id="loginError">❌ ভুল Username বা Password!</div>
-        <label>Username</label>
-        <input type="text" id="loginUser" placeholder="Username লিখুন" autocomplete="off">
-        <label>Password</label>
-        <input type="password" id="loginPass" placeholder="Password লিখুন" autocomplete="off">
-        <button class="btn-login" onclick="doLogin()">🔓 লগইন করুন</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ADMIN PANEL -->
+  <!-- ADMIN PANEL (সরাসরি খুলবে, লগইন নেই) -->
   <div id="adminView" class="hidden">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
-      <p style="color:#94a3b8;font-size:14px;">👤 লগইন: <b style="color:#38bdf8;"></b></p>
-      <button class="btn btn-logout" onclick="doLogout()">🚪 লগআউট</button>
-    </div>
-
     <div class="form-box">
       <h3 id="formTitle">নতুন Market যোগ করুন</h3>
       <input type="hidden" id="editId">
 
       <label>Category</label>
       <select id="category" onchange="toggleSportField()">
-        <option value="fancy">Fancy  (শুধু Cricket)</option>
-        <option value="premium">Premium </option>
+        <option value="fancy">Fancy Bet (শুধু Cricket)</option>
+        <option value="premium">Premium Bet</option>
       </select>
 
       <div id="sportField">
@@ -229,13 +173,13 @@ footer {
       <button class="btn btn-reset" onclick="resetForm()">🔄 রিসেট</button>
     </div>
 
-    <h3 style="color:#38bdf8;margin-bottom:12px;">🎯 Fancy </h3>
+    <h3 style="color:#38bdf8;margin-bottom:12px;">🎯 Fancy Bet</h3>
     <table class="admin-table" id="fancyTable">
       <thead><tr><th>Name</th><th>Meaning</th><th>Type</th><th>Action</th></tr></thead>
       <tbody></tbody>
     </table>
 
-    <h3 style="color:#38bdf8;margin-bottom:12px;">⭐ Premium </h3>
+    <h3 style="color:#38bdf8;margin-bottom:12px;">⭐ Premium Bet</h3>
     <table class="admin-table" id="premiumTable">
       <thead><tr><th>Sport</th><th>Name</th><th>Meaning</th><th>Type</th><th>Action</th></tr></thead>
       <tbody></tbody>
@@ -248,12 +192,7 @@ footer {
 </footer>
 
 <script>
-// ===== ADMIN CREDENTIALS =====
-var ADMIN_USER = "";
-var ADMIN_PASS = "";
-var isLoggedIn = false;
-
-// ===== ডিফল্ট ডেটা (সম্পূর্ণ মার্কেট তালিকা) =====
+// ===== ডিফল্ট ডেটা =====
 var defaultData = {
   fancy: [
     { id: 1,  name: "6 Over Run",              meaning: "প্রথম ৬ ওভারে মোট রান",                      type: "Yes/No" },
@@ -273,7 +212,7 @@ var defaultData = {
     { id: 15, name: "Total Sixes in Match",    meaning: "ম্যাচে মোট ছক্কার সংখ্যা",                   type: "Yes/No" }
   ],
   premium: [
-    // ===== Cricket =====
+    // Cricket
     { id: 101, sport: "Cricket", name: "To Win the Match",                      meaning: "ম্যাচ জেতা",                                  type: "2 Way" },
     { id: 102, sport: "Cricket", name: "To Win the Toss",                       meaning: "টস জেতা",                                    type: "2 Way" },
     { id: 103, sport: "Cricket", name: "Total Runs in Match",                   meaning: "ম্যাচের মোট রান",                             type: "Over/Under" },
@@ -291,7 +230,7 @@ var defaultData = {
     { id: 115, sport: "Cricket", name: "Match Fours",                           meaning: "ম্যাচে মোট চারের সংখ্যা",                     type: "Over/Under" },
     { id: 116, sport: "Cricket", name: "Match Sixes",                           meaning: "ম্যাচে মোট ছক্কার সংখ্যা",                   type: "Over/Under" },
 
-    // ===== Soccer =====
+    // Soccer
     { id: 201, sport: "Soccer",  name: "Match Result (1X2)",                    meaning: "ম্যাচের ফলাফল (হোম/ড্র/অ্যাওয়ে)",             type: "3 Way" },
     { id: 202, sport: "Soccer",  name: "Double Chance",                         meaning: "ডাবল সুযোগ (দুই ফলাফলের যেকোনো একটি)",        type: "2 Way" },
     { id: 203, sport: "Soccer",  name: "Winner",                                meaning: "বিজয়ী দল",                                  type: "2 Way" },
@@ -310,7 +249,7 @@ var defaultData = {
     { id: 216, sport: "Soccer",  name: "Total Corners",                         meaning: "ম্যাচে মোট কর্নারের সংখ্যা",                  type: "Over/Under" },
     { id: 217, sport: "Soccer",  name: "Total Cards",                           meaning: "ম্যাচে মোট কার্ডের সংখ্যা",                   type: "Over/Under" },
 
-    // ===== Tennis =====
+    // Tennis
     { id: 301, sport: "Tennis",  name: "To Win Match",                          meaning: "ম্যাচ জেতা",                                  type: "2 Way" },
     { id: 302, sport: "Tennis",  name: "Number of Sets - 2-Way",                meaning: "সেট সংখ্যা - ২-দিকের",                        type: "Over/Under" },
     { id: 303, sport: "Tennis",  name: "Tie Break in Match",                    meaning: "ম্যাচে টাইব্রেক হবে কি?",                     type: "Yes/No" },
@@ -339,7 +278,7 @@ function saveData() {
   localStorage.setItem("betListingData_v3", JSON.stringify(data));
 }
 
-// ===== ট্যাব সুইচ =====
+// ===== ট্যাব সুইচ (লগইন নেই, সরাসরি) =====
 function showTab(tab) {
   document.getElementById("tabFrontend").classList.remove("active");
   document.getElementById("tabAdmin").classList.remove("active");
@@ -348,62 +287,13 @@ function showTab(tab) {
     document.getElementById("tabFrontend").classList.add("active");
     document.getElementById("frontendView").classList.remove("hidden");
     document.getElementById("adminView").classList.add("hidden");
-    document.getElementById("adminLoginView").classList.add("hidden");
     renderCards();
   } else {
     document.getElementById("tabAdmin").classList.add("active");
     document.getElementById("frontendView").classList.add("hidden");
-
-    if (isLoggedIn) {
-      document.getElementById("adminView").classList.remove("hidden");
-      document.getElementById("adminLoginView").classList.add("hidden");
-      renderTables();
-    } else {
-      document.getElementById("adminView").classList.add("hidden");
-      document.getElementById("adminLoginView").classList.remove("hidden");
-      document.getElementById("loginUser").value = "";
-      document.getElementById("loginPass").value = "";
-      document.getElementById("loginError").classList.remove("show");
-    }
-  }
-}
-
-// ===== লগইন =====
-function doLogin() {
-  var u = document.getElementById("loginUser").value.trim();
-  var p = document.getElementById("loginPass").value;
-  var err = document.getElementById("loginError");
-
-  if (u === ADMIN_USER && p === ADMIN_PASS) {
-    isLoggedIn = true;
-    err.classList.remove("show");
-    document.getElementById("adminLoginView").classList.add("hidden");
     document.getElementById("adminView").classList.remove("hidden");
     renderTables();
-  } else {
-    err.classList.add("show");
-    document.getElementById("loginPass").value = "";
   }
-}
-
-document.addEventListener("keydown", function(e) {
-  if (e.key === "Enter") {
-    var loginView = document.getElementById("adminLoginView");
-    if (loginView && !loginView.classList.contains("hidden")) {
-      doLogin();
-    }
-  }
-});
-
-// ===== লগআউট =====
-function doLogout() {
-  if (!confirm("আপনি কি লগআউট করতে চান?")) return;
-  isLoggedIn = false;
-  document.getElementById("adminView").classList.add("hidden");
-  document.getElementById("adminLoginView").classList.remove("hidden");
-  document.getElementById("loginUser").value = "";
-  document.getElementById("loginPass").value = "";
-  document.getElementById("loginError").classList.remove("show");
 }
 
 // ===== Sport ফিল্ড দেখানো/লুকানো =====
@@ -428,7 +318,6 @@ function renderCards() {
            i.meaning.toLowerCase().indexOf(search) !== -1;
   }
 
-  // Fancy
   var fancyContainer = document.getElementById("fancyCards");
   var fancyFiltered = data.fancy.filter(match);
   if (fancyFiltered.length === 0) {
@@ -443,7 +332,6 @@ function renderCards() {
     }).join("");
   }
 
-  // Premium
   var premiumContainer = document.getElementById("premiumContainer");
   var premiumFiltered = data.premium.filter(match);
 
@@ -524,8 +412,6 @@ function renderTables() {
 
 // ===== সেভ (Add / Edit) =====
 function saveItem() {
-  if (!isLoggedIn) { alert("আগে লগইন করুন!"); return; }
-
   var editId = document.getElementById("editId").value;
   var category = document.getElementById("category").value;
   var sport = document.getElementById("sport").value;
@@ -585,7 +471,6 @@ function editItem(category, id) {
 
 // ===== ডিলিট =====
 function deleteItem(category, id) {
-  if (!isLoggedIn) { alert("আগে লগইন করুন!"); return; }
   if (!confirm("আপনি কি নিশ্চিত এই আইটেম ডিলিট করতে চান?")) return;
   if (category === "fancy") {
     data.fancy = data.fancy.filter(function(i) { return i.id !== id; });
