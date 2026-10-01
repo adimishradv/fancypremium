@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bet Listing — Fancy & Premium</title>
+<title>Fancy & Premium Listing</title>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
@@ -113,8 +113,8 @@ footer {
 <body>
 
 <header>
-  <h1>🏏 Bet Listing</h1>
-  <p>Fancy Bet & Premium Bet — বাংলা Meaning সহ</p>
+  <h1>🏏 Fancy & Premium</h1>
+  <p>Fancy & Premium — বাংলা Meaning সহ</p>
   <div class="tabs">
     <button class="tab-btn active" id="tabFrontend" onclick="showTab('frontend')">📋 Frontend</button>
     <button class="tab-btn" id="tabAdmin" onclick="showTab('admin')">⚙️ Admin Panel</button>
@@ -128,16 +128,16 @@ footer {
       <input type="text" id="searchInput" placeholder="🔍 খুঁজুন...">
     </div>
     <section class="listing-section">
-      <h2>🎯 Fancy Bet (Cricket)</h2>
+      <h2>🎯 Fancy (Cricket)</h2>
       <div class="cards" id="fancyCards"></div>
     </section>
     <section class="listing-section">
-      <h2>⭐ Premium Bet</h2>
+      <h2>⭐ Premium</h2>
       <div id="premiumContainer"></div>
     </section>
   </div>
 
-  <!-- ADMIN PANEL (সরাসরি খুলবে, লগইন নেই) -->
+  <!-- ADMIN PANEL -->
   <div id="adminView" class="hidden">
     <div class="form-box">
       <h3 id="formTitle">নতুন Market যোগ করুন</h3>
@@ -145,8 +145,8 @@ footer {
 
       <label>Category</label>
       <select id="category" onchange="toggleSportField()">
-        <option value="fancy">Fancy Bet (শুধু Cricket)</option>
-        <option value="premium">Premium Bet</option>
+        <option value="fancy">Fancy (শুধু Cricket)</option>
+        <option value="premium">Premium</option>
       </select>
 
       <div id="sportField">
@@ -173,13 +173,13 @@ footer {
       <button class="btn btn-reset" onclick="resetForm()">🔄 রিসেট</button>
     </div>
 
-    <h3 style="color:#38bdf8;margin-bottom:12px;">🎯 Fancy Bet</h3>
+    <h3 style="color:#38bdf8;margin-bottom:12px;">🎯 Fancy</h3>
     <table class="admin-table" id="fancyTable">
       <thead><tr><th>Name</th><th>Meaning</th><th>Type</th><th>Action</th></tr></thead>
       <tbody></tbody>
     </table>
 
-    <h3 style="color:#38bdf8;margin-bottom:12px;">⭐ Premium Bet</h3>
+    <h3 style="color:#38bdf8;margin-bottom:12px;">⭐ Premium</h3>
     <table class="admin-table" id="premiumTable">
       <thead><tr><th>Sport</th><th>Name</th><th>Meaning</th><th>Type</th><th>Action</th></tr></thead>
       <tbody></tbody>
@@ -278,7 +278,7 @@ function saveData() {
   localStorage.setItem("betListingData_v3", JSON.stringify(data));
 }
 
-// ===== ট্যাব সুইচ (লগইন নেই, সরাসরি) =====
+// ===== ট্যাব সুইচ =====
 function showTab(tab) {
   document.getElementById("tabFrontend").classList.remove("active");
   document.getElementById("tabAdmin").classList.remove("active");
